@@ -8,7 +8,7 @@ Available end points:
 Create document:
 https://us-central1-kitt-da2fa.cloudfunctions.net/app/api/create
 
-Example body:
+    Example body:
     {
         "id": 1,
         "name": "North Terrace Stroll",
@@ -19,7 +19,7 @@ Example body:
 Read all documents:
 https://us-central1-kitt-da2fa.cloudfunctions.net/app/api/read
 
-Example response:
+    Example response:
     [
         {
             "id": "1",
@@ -38,7 +38,7 @@ Example response:
 Read by ID:
 https://us-central1-kitt-da2fa.cloudfunctions.net/app/api/read/1
 
-Example response:
+    Example response:
     {
         "id": "1",
         "name": "North Terrace Stroll",
