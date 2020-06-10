@@ -41,7 +41,40 @@ app.post('/api/create', (req, res) => {
     })()
 })
 
-//Read
+//Read all 
+app.get('/api/read', (req, res) => {
+    (async () => {
+
+        try {
+            const query = db.collection('apiAscents')
+            let response = []
+
+            await query.get().then(querySnapshot => {
+                let docs = querySnapshot.docs
+
+                for (let doc of docs) {
+                    const item = {
+                        id: doc.id,
+                        name: doc.data().name,
+                        grade: doc.data().grade,
+                        ascentType: doc.data().ascentType,
+                    }
+                    response.push(item)
+                }
+                return response
+            })
+
+            return res.status(200).send(response)
+        } catch (error) {
+            console.log(error) 
+            return res.status(500).send(error) 
+        }
+
+    })()
+})
+
+
+//Read by id
 app.get('/api/read/:id', (req, res) => {
     (async () => {
 
@@ -61,6 +94,26 @@ app.get('/api/read/:id', (req, res) => {
 
 
 //Update
+app.put('/api/update/:id', (req, res) => {
+    (async () => {
+
+        try {
+            const document = db.collection('apiAscents').doc(req.params.id)
+            
+            await document.update({
+                name: req.body.name,
+                grade: req.body.grade,
+                ascentType: req.body.ascentType
+            })
+
+            return res.status(200).send()
+        } catch (error) {
+            console.log(error) 
+            return res.status(500).send(error) 
+        }
+
+    })()
+})
 
 
 //Delete
