@@ -117,6 +117,21 @@ app.put('/api/update/:id', (req, res) => {
 
 
 //Delete
+app.delete('/api/delete/:id', (req, res) => {
+    (async () => {
+
+        try {
+            const document = db.collection('apiAscents').doc(req.params.id)
+            await document.delete()
+
+            return res.status(200).send()
+        } catch (error) {
+            console.log(error) 
+            return res.status(500).send(error) 
+        }
+
+    })()
+})
 
 
 //Export functions
